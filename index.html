@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite pra Mih 💙</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Playfair+Display&display=swap" rel="stylesheet"/>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+padding:2rem;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+min-height:100vh;
+}
+
+h1,h2{
+font-family:'Playfair Display',serif;
+text-align:center;
+margin-bottom:1rem;
+color:#cfd9ff;
+}
+
+p{
+text-align:center;
+margin:1rem 0 2rem;
+font-size:1rem;
+color:#e3eaff;
+}
+
+.button-grid{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:1rem;
+margin-top:1rem;
+}
+
+.btn{
+padding:0.8rem 2rem;
+background:linear-gradient(135deg,#4facfe,#c2e9fb);
+border:none;
+border-radius:2rem;
+color:#002244;
+font-size:1rem;
+cursor:pointer;
+transition:0.3s;
+font-weight:500;
+}
+
+.btn:hover{
+transform:scale(1.05);
+background:linear-gradient(135deg,#a1c4fd,#c2e9fb);
+}
+
+.selected{
+background:linear-gradient(135deg,#dfe9f3,#ffffff);
+box-shadow:0 0 10px #a5c8ff;
+}
+
+.hidden{
+display:none;
+}
+
+input[type="date"]{
+margin-top:1rem;
+padding:0.6rem;
+border-radius:1rem;
+border:none;
+width:80%;
+max-width:300px;
+font-family:'Poppins',sans-serif;
+}
+
+.footer-nav{
+margin-top:2rem;
+display:flex;
+justify-content:center;
+gap:1rem;
+flex-wrap:wrap;
+}
+
+button:disabled{
+background:#888;
+cursor:not-allowed;
+}
+
+#mensagem-fofa{
+margin-top:2rem;
+color:#d6e6ff;
+font-weight:bold;
+font-size:1.1rem;
+text-align:center;
+}
+
+.hearts{
+display:flex;
+justify-content:center;
+margin-top:2rem;
+}
+
+.hearts span{
+font-size:2rem;
+opacity:0;
+animation:fadeInUp 2s ease-in-out infinite;
+}
+
+.hearts span:nth-child(1){animation-delay:0s;}
+.hearts span:nth-child(2){animation-delay:0.4s;}
+.hearts span:nth-child(3){animation-delay:0.8s;}
+
+@keyframes fadeInUp{
+0%{transform:translateY(10px);opacity:0;}
+50%{transform:translateY(-10px);opacity:1;}
+100%{transform:translateY(10px);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="page1">
+
+<h1>Mih... 💙</h1>
+
+<p>
+Eu queria fazer um convite diferente pra você.  
+Nada muito complicado… só uma ideia de um date legal pra gente em Cascavel.  
+Então pensei em deixar você escolher algumas partes da noite.
+</p>
+
+<p>
+Prometo que a companhia vai ser boa (a minha)  
+e o objetivo é só a gente passar um momento leve juntos.
+</p>
+
+<div class="footer-nav">
+<button class="btn" onclick="nextPage('page1','page2')">Começar ➜</button>
+</div>
+
+</div>
+
+<div id="page2" class="hidden">
+
+<h2>O que você prefere jantar?</h2>
+
+<div class="button-grid">
+
+<button class="btn" onclick="selectOption(this,'jantar')">Comida Japonesa 🍣</button>
+<button class="btn" onclick="selectOption(this,'jantar')">Churrasco 🥩</button>
+<button class="btn" onclick="selectOption(this,'jantar')">Hamburguer 🍔</button>
+<button class="btn" onclick="selectOption(this,'jantar')">Comida Italiana 🍝</button>
+<button class="btn" onclick="selectOption(this,'jantar')">Pizza 🍕</button>
+<button class="btn" onclick="selectOption(this,'jantar')">Netflix + jantar feito por mim 🍷</button>
+
+</div>
+
+<div class="footer-nav">
+<button class="btn" onclick="nextPage('page2','page3')" id="btn2" disabled>Próximo ➜</button>
+</div>
+
+</div>
+
+<div id="page3" class="hidden">
+
+<h2>O que fazer antes do jantar em Cascavel?</h2>
+
+<div class="button-grid">
+
+<button class="btn" onclick="selectOption(this,'pos')">Caminhar no Lago Municipal 🌿</button>
+<button class="btn" onclick="selectOption(this,'pos')">Ver o pôr do sol no Lago 🌇</button>
+<button class="btn" onclick="selectOption(this,'pos')">Tomar um café no Centro ☕</button>
+<button class="btn" onclick="selectOption(this,'pos')">Passear na Catedral 🏛️</button>
+<button class="btn" onclick="selectOption(this,'pos')">Dar uma volta no JL Shopping 🛍️</button>
+<button class="btn" onclick="selectOption(this,'pos')">Surpresa minha 🤫</button>
+
+</div>
+
+<div class="footer-nav">
+<button class="btn" onclick="nextPage('page3','page4')" id="btn3" disabled>Próximo ➜</button>
+</div>
+
+</div>
+
+<div id="page4" class="hidden">
+
+<h2>Escolhe a data 🗓️</h2>
+
+<input type="date" id="data" onchange="enableNext('btn4')"/>
+
+<div class="footer-nav">
+<button class="btn" id="btn4" onclick="mostrarResumo()" disabled>Próximo ➜</button>
+</div>
+
+</div>
+
+<div id="page5" class="hidden">
+
+<h2>Então... Mih, aceita sair comigo? 💙</h2>
+
+<div class="button-grid">
+
+<button class="btn" onclick="aceitar()">Aceitar 💙</button>
+<button class="btn" onclick="naoAceitar()">Não aceitar 🙈</button>
+
+</div>
+
+<p id="msg-repensar" class="hidden" style="margin-top:1rem;font-style:italic;"></p>
+
+</div>
+
+<div id="page6" class="hidden">
+
+<h2>Resumo do nosso date 💌</h2>
+
+<p id="resumo"></p>
+
+<div id="mensagem-fofa">
+Agora é oficial...  
+Só falta chegar o dia.
+
+<br><br>
+
+<strong>Mal posso esperar por esse momento com você, Mih 💙</strong>
+</div>
+
+<div class="hearts">
+<span>💙</span>
+<span>✨</span>
+<span>💫</span>
+</div>
+
+</div>
+
+<script>
+
+let escolhas={
+jantar:"",
+pos:"",
+data:""
+}
+
+function nextPage(current,next){
+document.getElementById(current).classList.add("hidden")
+document.getElementById(next).classList.remove("hidden")
+}
+
+function selectOption(button,tipo){
+
+let container=button.parentElement
+
+container.querySelectorAll(".btn").forEach(btn=>{
+btn.classList.remove("selected")
+})
+
+button.classList.add("selected")
+
+escolhas[tipo]=button.textContent
+
+if(tipo==='jantar'){
+document.getElementById("btn2").disabled=false
+}
+
+if(tipo==='pos'){
+document.getElementById("btn3").disabled=false
+}
+
+}
+
+function enableNext(id){
+
+escolhas.data=document.getElementById("data").value
+
+document.getElementById(id).disabled=!escolhas.data
+
+}
+
+function mostrarResumo(){
+nextPage('page4','page5')
+}
+
+function aceitar(){
+
+nextPage('page5','page6')
+
+document.getElementById("resumo").textContent=
+`Você escolheu ${escolhas.pos.toLowerCase()}, depois um jantar ${escolhas.jantar.toLowerCase()}, no dia ${new Date(escolhas.data).toLocaleDateString('pt-BR')}.`
+
+}
+
+function naoAceitar(){
+
+const msg=document.getElementById("msg-repensar")
+
+msg.textContent="Tem certeza? 😅 Talvez valha reconsiderar... prometo que o date vai ser bom."
+
+msg.classList.remove("hidden")
+
+}
+
+</script>
+
+</body>
+</html>
